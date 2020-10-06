@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 const router = express.Router();
 
+
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -36,33 +37,39 @@ const productSchema = new mongoose.Schema({
         type: Number,
       },
 
-      /*sold: {
+      sold: {
         type: Number,
         default: 0,
       },
 
-      photo: {
-        data: Buffer,
-        contentType: String,
-      },*/
-
+     photo: {
+        unique_id: Number,
+        Name: String,
+        image1: String,
+        image2: String,
+        image3: String,
+        added_date:{
+            type: Date,
+            default: Date.now,
+          }     },
 
 });
 
 const Product = mongoose.model('Product', productSchema);
 const product = new Product({ });
 
-module.exports = function validateProduct(product) {
+function validateProduct(products) {
     const schema = {
-        name: Joi.string().trim().maxlength().required(),
-        description: Joi.string().trim().required(),
-        price: Joi.number().maxlength().trim().required(),
+        name: Joi.string().required(),
+        description: Joi.string().required(),
+        price: Joi.number().required(),
         category: Joi.string().required(),
         stock: Joi.number(),
         sold: Joi.number(),
-        photo: Joi.buffer(),
+        //photo: Joi.buffer(),
     }
 }
 
 module.exports = Product;
+module.exports.validate = validateProduct;
 
