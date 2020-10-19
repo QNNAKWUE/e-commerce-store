@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const router = express.Router();
+//onst router = express.Router();
 
 
 const productSchema = new mongoose.Schema({
@@ -43,16 +43,8 @@ const productSchema = new mongoose.Schema({
       },
 
      photo: {
-        unique_id: Number,
-        Name: String,
-        image1: String,
-        image2: String,
-        image3: String,
-        added_date:{
-            type: Date,
-            default: Date.now,
-          }     },
-
+        type: String,
+     },
 });
 
 const Product = mongoose.model('Product', productSchema);
@@ -70,6 +62,6 @@ function validateProduct(products) {
     }
 }
 
-module.exports = Product;
+module.exports.Product = Product;
 module.exports.validate = validateProduct;
 

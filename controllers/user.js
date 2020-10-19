@@ -11,7 +11,6 @@ const bcrypt = require('bcrypt');
 
 
     exports.signUp  = async function (req, res) {
-        console.log("user called");
         const error = validate(req.body);
         if(error) {
             res.status(400).send(error.details[0].message);

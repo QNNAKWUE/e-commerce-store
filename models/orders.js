@@ -1,42 +1,42 @@
-const express = require('express');
 const mongoose = require('mongoose');
-
-
-const productCartSchema = new mongoose.Schema({
-    //product: {
-        //type: objectId,
-        //ref: "Product",
-    //},
-
-    name: String,
-    price: Number,
-    count: Number,
-});
-
-const ProductCart = mongoose.model("ProductCart", productCartSchema);
-const productCart = new ProductCart({});
-
+const Joi = require('joi');
+ 
 const orderSchema = new mongoose.Schema({
-    //products: [productCartSchema],
-    transaction_id: {
-        type: String,
-    },
+
+  name: {
+    type: String,
+    required: true,
+  },
 
     amount: Number,
+
     status: {
-        type: String,
-        default: "Received",
-        enum: ["Cancelled", "Delivered", "Shipped", "Processing", "Received"],
+      type: String,
+      default: "Received",
+      enum: ["Cancelled", "Delivered", "Shipped", "Processing", "Received"],
     },
-    
-    address: String,
-    updated: Date,
-    user: { ref: "User"}
+    address: {
+        type: String,
+        required: true,
+    },
+
+   timestamps: {
+      type: Boolean,
+  },
+
 });
 
-const Order = mongoose.model("Order", orderSchema);
+const Order = mongoose.model('Order', orderSchema);
 const order = new Order({});
 
-module.exports = Order;
-module.exports = ProductCart;
+function validateOrder(orders){
+  const schema = {
+    name: Joi.string().max(30).required(),
+    amount: Joi.number().required(),
+    address: Joi.string().max(200).required(),
 
+  }
+
+}
+module.exports.Order = Order;
+module.exports.validate = validateOrder;

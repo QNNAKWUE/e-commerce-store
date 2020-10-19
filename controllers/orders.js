@@ -1,25 +1,41 @@
-const express = require('express');
-const { Order, ProductCart } = require("../models/orders");
+const { Order } = require("../models/orders");
+const {validate} = require("../models/orders");
+const _  = require('lodash');
 
 exports.getOrderById = (async (req, res, id) =>{
     const order = await Order.findById(id)
     .sort("Product", "name")
     if(!order) {
-        return res.status(400).send("Order not found")
+        return res.status(400).send("The order with the given ID was not found")
     }
     res.json({order});  
 });
 
-exports.createOrder = (async (req, res) =>{
-    let order = new Order({
-        order: req.body.order
-    });
-    order = await Order.save();
-    if(!order){
-        return res.status(400).send("Saving Order to DB failed");
+exports.getAllOrders = async(req, res) =>{
+    const orders = await orders.find().sort(name);
+    if(!orders) {
+        res.status(400).send("Could not get Orders");
     }
+    res.send(orders);
+}
+
+exports.createOrder = async (req, res) =>{
+    const error = validate(req.body);
+    if(error){
+        res.status(400).send(error.details[0].message)
+    }
+
+    const order = new Order({
+        name: req.body.name,
+        address: req.body.address,
+        amount: req.body.amount,
+        status: req.body.status
+    }) ;
+    
+    await order.save();
     res.json({order});
-});
+}
+
 
 exports.updateOrder = (async (req, res) =>{
     const order = await Order.findById(req.id, {name: req.body.name, new: true});

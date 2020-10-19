@@ -1,28 +1,30 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const validationResult = require('express-validator')
-const _ = require('underscore');
-const lodash = require('lodash');
-const { Category } = require('../models/category');
+const Joi = require('joi');
+const { auth} = require('../middleware/auth');
+const admin = require('../middleware/admin');
+const _ = require('lodash');
+const { Category, validate } = require('../models/category');
+
 
 
 exports.createCategories = (async (req, res)=>{
-    const { errors } = validationResult(req);
-    if(!error.isEmpty()){
-        res.status(422).json({errors: errors.array().map((arr) =>arr.msg)});
+    const  error = validate(req.body);
+    if(error){
+        res.status(422).send(error.details[0].message);
     };
 
-    const category = new Category(_.pick(category, ['name']));
+    const category = new Category({
+        name: req.body.name
+    });
 
     await category.save();
-    res.send(category);
+    res.json({category});
 });
 
 
 exports.getCategories = (async (req, res) =>{
     const categories = await Category.find().sort('name');
     if(!categories) {
-        return res.status(400).send("Could not find the categories");
+        return res.status(400).send("Could not find the category");
     }
     res.send(categories);
 });
@@ -55,6 +57,6 @@ exports.deleteCategory = (async (req, res)=>{
     res.send(category);
 });
 
-module.exports.category = category;
+
 
 

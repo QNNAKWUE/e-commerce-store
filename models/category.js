@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const  Joi  = require('joi');
 
 const categorySchema = new mongoose.Schema({
     name: {
@@ -13,5 +14,12 @@ const categorySchema = new mongoose.Schema({
 const Category = mongoose.model("Category", categorySchema);
 const category = new Category({});
 
+function validateCategory(req){
+    const schema = {
+        name: Joi.string().required().trim()
+    }
+}
+
 
 module.exports.Category = Category;
+module.exports.validate = validateCategory;
