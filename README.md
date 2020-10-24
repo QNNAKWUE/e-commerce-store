@@ -1,4 +1,4 @@
-“Amazon Store” to demonstrate RESTful Services using NodeJS
+"An Online Store” to demonstrate RESTful Services using NodeJS
 
 Introduction
 
