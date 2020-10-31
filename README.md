@@ -2,13 +2,13 @@
 
 Introduction
 
-Developed a prototype of Amazon Online store called as 'Junior Amazon'. This includes a client and a server and provides below functionality.
+Developed a prototype of Jumia Online store called 'Beth Store'. This includes a client and a server and provides below functionality.
 
 1) User login (Authentication)
 2) User can sign up
 3) Browse through product depending on the category selected by the user
 4) Add/Remove product to/from shopping cart.
-5) Shopping cart checkout on making the payment which includes entering a sixteen digit card number.
+5) Shopping cart checkout on making payment using Stripe.
 6) Admin can add new category.
 7) Admin can add new products in the category
 8) Uses connection pooling for maintaining database connections and better performance.
