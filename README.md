@@ -13,7 +13,4 @@ Developed a prototype of Jumia Online store called 'Beth Store'. This includes a
 7) Admin can add new products in the category
 8) Uses connection pooling for maintaining database connections and better performance.
 
-It uses NodeJS framework and demonstrates RESTFul web services while communicating with the server. The application also used front-end framework called Bootstrap and JavaScript library jQuery. The application also uses a JADE templating engine which provides more systematic way to create HTML pages which also helps in avoiding human error like missing end tags.
-
-Operating Environment
-This project uses node.js platform for it's development and uses express framework for working with different functionalities provided by node.js. Also, it uses restful calls for client-server interaction.
+It uses NodeJS framework and demonstrates RESTFul web services while communicating with the server. Its also uses node.js platform for it's development and express framework for working with different functionalities provided by node.js, alongside restful calls for client-server interaction.
